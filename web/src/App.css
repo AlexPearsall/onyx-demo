@@ -1,0 +1,143 @@
+/* Basic layout */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+  }
+  
+  .main {
+    margin-left: 10vw;
+  }
+
+/* Header style */
+.header {
+  left: 10vw;
+  height: 10vh;
+  position: sticky;
+  top: 0;
+  background-color: white;
+  color: white;
+  padding: 15px;
+  text-align: center;
+  font-size: 1.5rem;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+}
+
+/* Logo styles */
+.header .logo {
+  position: absolute;
+  left: 20px;
+}
+
+.header .logo img {
+  max-height: 8vh;
+  width: auto;
+}
+
+/* Project title styles */
+.header .project-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #223046;
+  text-align: center;
+  margin: 0 auto;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Sidebar style */
+.sidebar {
+  position: fixed;
+  width: 10vw;
+  height: 100%;
+  background-color: #ffffff;
+  padding: 20px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-header {
+  color: #223046;
+  text-align: center;
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.sidebar-item {
+  margin: 10px 0;
+  cursor: pointer;
+}
+
+.sidebar-item:hover {
+  background-color: #4a5a67;
+  padding: 10px;
+}
+
+/* Sidebar Icon Styles */
+.sidebar-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  margin: 20px 0;
+}
+
+.icon-container {
+    width: 90px;
+    height: 40px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.icon-container:hover {
+    filter: brightness(1.2);
+}
+
+.icon-label {
+    margin-top: 5px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #333;
+    text-align: center;
+}
+  
+/* Grid Styles*/
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(16, 0.5fr);
+  grid-template-rows: repeat(16, 0.5fr);
+  gap: 1px;
+  height: calc(100vh - 10vh);
+  width: calc(100vw - 10vw);
+  background-color: #f0f0f0;
+  overflow: hidden;
+}
+
+/* Square grid items */
+.grid-item {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  aspect-ratio: 1;
+}
