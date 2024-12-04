@@ -1,13 +1,16 @@
 import React from 'react';
-import { FaPlus, FaTrash, FaEdit, FaFileExport } from 'react-icons/fa';
+import { FaPlus, FaRedo, FaFileExport } from 'react-icons/fa';
 import SidebarIcon from './SidebarIcon';
+
+function alertNewNode() {
+    return "Alert New Node";
+}
 
 function Sidebar() {
     const menuItems = [
-        { id: 1, label: 'New CenterNode', icon: <FaPlus size={20} color="#fff" />, bgColor: '#223046' },
-        { id: 2, label: 'Delete CenterNode', icon: <FaTrash size={20} color="#fff" />, bgColor: '#D23F3F' },
-        { id: 3, label: 'Edit Branch', icon: <FaEdit size={20} color="#fff" />, bgColor: '#A050C3' },
-        { id: 4, label: 'Import/Export', icon: <FaFileExport size={20} color="#fff" />, bgColor: '#67B1DF' },
+        { id: 1, label: 'New Node', icon: <FaPlus size={20} color="#fff" />, bgColor: '#223046', onClick: alertNewNode },
+        { id: 2, label: 'Save', icon: <FaFileExport size={20} color="#fff" />, bgColor: '#67B1DF', onClick: alertNewNode },
+        { id: 3, label: 'Reset', icon: <FaRedo size={20} color="#fff" />, bgColor: '#D23F3F', onClick: alertNewNode },
     ];
 
     return (
@@ -20,12 +23,11 @@ function Sidebar() {
                         icon={item.icon}
                         label={item.label}
                         bgColor={item.bgColor}
-                        onClick={() => alert(`${item.label} clicked!`)} //Sample alert now, handle this later
+                        onClick={item.onClick}
                     />
                 ))}
             </div>
-        </div>
-    );
+        </div>    );
 }
 
 export default Sidebar;
