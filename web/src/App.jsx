@@ -2,16 +2,17 @@ import React from 'react';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
 import Grid from './components/Grid';
+import CenterNode from './components/CenterNode';
 import './App.css';
 
 function App() {
     return (
         <div className="app">
-            <Sidebar />
+            <Sidebar/>
             <div className="main">
-                <Header />
+                <Header/>
                 <div className="content">
-                    <Grid />
+                    <Grid/>
                 </div>
             </div>
         </div>
