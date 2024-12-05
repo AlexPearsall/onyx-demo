@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const CenterNode = ({ id, topSize, leftSize }) => {
+const CenterNode = ({ topSize, leftSize }) => {
 
     return (
         <div className="nodeSub" style={{ top: topSize, left: leftSize }}>
