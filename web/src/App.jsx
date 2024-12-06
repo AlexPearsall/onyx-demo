@@ -11,9 +11,8 @@ function App() {
 
     const [nodes, setNodes] = useState([]);
 
-    function addNode() {
-        //TODO Edit the topSize and leftSize to change when adding a node
-        const newNode = <NodeSub key={"subnode-" + nodes.length} topSize={25 * nodes.length} leftSize={25 * nodes.length}/>
+    function addNode(topSize, leftSize) {
+        const newNode = <NodeSub key={"subnode-" + nodes.length} topSize={topSize} leftSize={leftSize}/>
         setNodes((allNodes) => [...allNodes, newNode]);
     }
 

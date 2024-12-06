@@ -6,11 +6,24 @@ function alertNewNode() {
     alert("Button Pressed")
 }
 
-function Sidebar({ addNode } ) {
+function Sidebar({ addNode }) {
     const menuItems = [
-        { id: 1, label: 'New Node', icon: <FaPlus size={20} color="#fff" />, bgColor: '#223046', onClick: addNode },
-        { id: 2, label: 'Save', icon: <FaFileExport size={20} color="#fff" />, bgColor: '#67B1DF', onClick: alertNewNode },
-        { id: 3, label: 'Reset', icon: <FaRedo size={20} color="#fff" />, bgColor: '#D23F3F', onClick: alertNewNode },
+        {
+            id: 1,
+            label: 'New Node',
+            icon: <FaPlus size={20} color="#fff"/>,
+            bgColor: '#223046',
+            // TODO Replace the Random functions with the locations of a sub-node
+            onClick: () => addNode(Math.random() * 600, Math.random() * 1000)
+        },
+        {
+            id: 2,
+            label: 'Save',
+            icon: <FaFileExport size={20} color="#fff"/>,
+            bgColor: '#67B1DF',
+            onClick: alertNewNode
+        },
+        { id: 3, label: 'Reset', icon: <FaRedo size={20} color="#fff"/>, bgColor: '#D23F3F', onClick: alertNewNode },
     ];
 
     return (
@@ -27,7 +40,7 @@ function Sidebar({ addNode } ) {
                     />
                 ))}
             </div>
-        </div>    );
+        </div>);
 }
 
 export default Sidebar;
