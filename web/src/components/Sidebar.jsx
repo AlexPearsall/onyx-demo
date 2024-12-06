@@ -3,12 +3,12 @@ import { FaPlus, FaRedo, FaFileExport } from 'react-icons/fa';
 import SidebarIcon from './SidebarIcon';
 
 function alertNewNode() {
-    return "Alert New Node";
+    alert("Button Pressed")
 }
 
-function Sidebar() {
+function Sidebar({ addNode } ) {
     const menuItems = [
-        { id: 1, label: 'New Node', icon: <FaPlus size={20} color="#fff" />, bgColor: '#223046', onClick: alertNewNode },
+        { id: 1, label: 'New Node', icon: <FaPlus size={20} color="#fff" />, bgColor: '#223046', onClick: addNode },
         { id: 2, label: 'Save', icon: <FaFileExport size={20} color="#fff" />, bgColor: '#67B1DF', onClick: alertNewNode },
         { id: 3, label: 'Reset', icon: <FaRedo size={20} color="#fff" />, bgColor: '#D23F3F', onClick: alertNewNode },
     ];
