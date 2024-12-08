@@ -1,19 +1,21 @@
-import CenterNode from "./CenterNode";
 import React from "react";
+import Node from "./Node";
 
-const defXPos = 338;
-const defYPos = 610;
-const centerPointX = defXPos + 16
-const centerPointY = defYPos + 16
-
-const cn = <CenterNode topSize={defXPos} leftSize={defYPos}/>
-
-const ProjectNodes = ({ allSubNodes }) => {
+const ProjectNodes = ({ allSubNodes, onNodeClick, selectedNode }) => {
 
     return (
         <div>
-            {cn}
-            {allSubNodes.map((node) => (node))}
+            {allSubNodes.map(node => (
+                <Node
+                    key={node.id}
+                    id={node.id}
+                    top={node.top}
+                    left={node.left}
+                    type={node.type}
+                    onClick={() => onNodeClick(node.id)}
+                    isSelected={selectedNode?.id === node.id}
+                />
+            ))}
         </div>
     )
 }
