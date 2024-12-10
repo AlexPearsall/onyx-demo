@@ -44,6 +44,12 @@ export const handleAddNode = async (type, top, left, selectedNode, updateStateCa
     }
 };
 
+/**
+ * Determines what happens when a node is clicked
+ * @param nodeId The ID of the node that was clicked
+ * @param currentSelectedNode The node that is currently selected
+ * @param updateStateCallback Function that updates the state of the node (clicked/un-clicked)
+ */
 export const handleNodeClick = async (nodeId, currentSelectedNode, updateStateCallback) => {
     const nodes = await getAllNodes();
     const selectedNode =
@@ -52,6 +58,10 @@ export const handleNodeClick = async (nodeId, currentSelectedNode, updateStateCa
     updateStateCallback({ selectedNode });
 };
 
+/**
+ * Resets the project to its initial state
+ * @param updateStateCallback The function that updates the state of the project
+ */
 export const handleReset = async (updateStateCallback, setMap) => {
     setMap(new Map())
     await resetDatabase();
