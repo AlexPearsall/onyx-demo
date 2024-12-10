@@ -6,6 +6,9 @@ import ProjectNodes from "./components/ProjectNodes.jsx";
 import { initDB, getAllNodes, getAllLinks } from './model/database.js';
 import { handleAddNode, handleNodeClick, handleReset } from './controller/logic.js';
 import './App.css';
+import { handlePosition } from "./controller/logic.js";
+
+export const Context = React.createContext()
 
 function App() {
     const [errorMessage, setErrorMessage] = useState(""); 
@@ -14,6 +17,11 @@ function App() {
         links: [],
         selectedNode: null,
     });
+    const [map, setMap] = useState(new Map())
+    
+
+
+    
 
     const updateState = (newState) => setState(prev => ({ ...prev, ...newState }));
 
@@ -29,12 +37,24 @@ function App() {
     }, []);
 
     return (
+        <Context.Provider value={[map,setMap]}>
         <div className="app">
             <Sidebar
-                addNode={(type, top, left) =>
-                    handleAddNode(type, top, left, state.selectedNode, updateState, setErrorMessage)
+                addNode={(type, top, left) =>{
+                    const id = map.size
+                    handleAddNode(type, top, left, state.selectedNode, updateState, setErrorMessage, map, setMap, id)                    
+                    
+                    let nMap = new Map(map)
+                    let pData = map.get(state.selectedNode.id)
+                    nMap.delete(state.selectedNode.id)
+                    nMap.set(state.selectedNode.id, [pData[0], pData[1],  pData[2]+1])
+                    setMap(nMap)
+
+                    
                 }
-                resetProject={() => handleReset(updateState)}
+                }
+                
+                resetProject={() => handleReset(updateState, setMap)}
                 selectedNode={state.selectedNode}
                 setErrorMessage={setErrorMessage}
             />
@@ -75,7 +95,12 @@ function App() {
                 </div>
             </div>
         </div>
+        </Context.Provider>
     );
 }
+
+
+
+
 
 export default App;

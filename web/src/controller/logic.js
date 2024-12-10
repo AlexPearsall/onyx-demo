@@ -1,13 +1,30 @@
 import { addNodeToDB, addLinkToDB, getAllNodes, getAllLinks, resetDatabase, addCentralNode } from '../model/database.js';
 
-export const handleAddNode = async (type, top, left, selectedNode, updateStateCallback, updateErrorMessageCallback) => {
+
+const niceOffset = 300;
+const niceTOffset = 100;
+const nodeWidth = 300;
+
+
+export const handleAddNode = async (type, top, left, selectedNode, updateStateCallback, updateErrorMessageCallback, map, setmap,id) => {
     if (selectedNode) {
+        
+        const position = handlePosition(map, setmap, selectedNode)
         const newNode = {
             id: `node-${Date.now()}`, // ID based on timestamp so it will always be unique
             type: type,
-            top,
-            left,
+            top: position[0],
+            left: position[1],
+            ring: selectedNode.ring+1,
+            place: selectedNode.count+1,
+            parent: selectedNode,
+            id: id
         };
+
+
+        await setTimeout(() => {
+            
+        }, 10000);
         const newLink = { from: selectedNode.id, to: newNode.id };
 
         // Save to IndexedDB
@@ -18,6 +35,7 @@ export const handleAddNode = async (type, top, left, selectedNode, updateStateCa
         const nodes = await getAllNodes();
         const links = await getAllLinks();
         updateStateCallback({ nodes, links, selectedNode: null });
+        
     } else {
         updateErrorMessageCallback("Please select a node.");
         setTimeout(() => {
@@ -34,9 +52,79 @@ export const handleNodeClick = async (nodeId, currentSelectedNode, updateStateCa
     updateStateCallback({ selectedNode });
 };
 
-export const handleReset = async (updateStateCallback) => {
+export const handleReset = async (updateStateCallback, setMap) => {
+    setMap(new Map())
     await resetDatabase();
+    const nMap = new Map()
+    nMap.set(0, [206, 465,0])
+    setMap(nMap)
     await addCentralNode();
     const centralNode = await getAllNodes();
     updateStateCallback({ nodes: centralNode, links: [], selectedNode: null });
 };
+
+
+
+export function handlePosition(map, setMap, selectedNode){
+    let top=0
+    let left=0
+    const ring = selectedNode.ring+1
+    console.log("RING:"+ring)
+    //I'm going to hardcode the first 4 positions, then the rest will be programmatic
+    //this will be vector based.
+    const nMap = new Map(map)
+    const parentData = nMap.get(selectedNode.id)
+    const count = parentData[2]
+    const parentTop = parentData[0]
+    const parentLeft = parentData[1]
+    console.log("count: "+count)
+    if(ring==0){
+        top = 206
+        left = 465
+    }else if(ring<2){
+
+        if(count==0){
+            top = parentTop
+            left = parentLeft-niceOffset
+            console.log("parent Top: "+parentTop)
+            console.log("made first kid")
+            
+        }else if(count==1){
+            console.log("parent Top: "+parentTop)
+            top = parentTop
+            left = parentTop+niceOffset+nodeWidth
+        }else if(count ==2){
+            console.log("parent Top: "+parentTop)
+            top = parentTop-niceTOffset
+            left = parentLeft
+        }else if(count ==3){
+            top = parentTop+niceTOffset
+            left = parentLeft
+        }
+    }else{
+        // const data = nMap.get(selectedNode.selectedNode.id)
+        // const grandTop = data[0]
+        // const grandLeft= data[1]
+        // //Get direction of node.
+        // //this should look like x2-x1/distance and y2-y1/distance
+        // let x = parentLeft-grandLeft
+        // let y = parentTop-grandTop
+        // if(count==0){
+        //     top = parentTop +y
+        //     left = parentLeft+x
+        //     console.log(`Left: ${left}, Top: ${top}`)
+        // }else if(count==1){
+        //     //update all nodes
+        // }else if(count==2){
+        //     //update all nodes
+        // }else{
+        //     //error
+        // }
+    }
+
+    
+    return [top, left]
+
+    
+    
+}
