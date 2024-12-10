@@ -1,5 +1,14 @@
 import { addNodeToDB, addLinkToDB, getAllNodes, getAllLinks, resetDatabase, addCentralNode } from '../model/database.js';
 
+/**
+ * Adds a node to the project board
+ * @param type Represents the type of node (Text, File, Central Node)
+ * @param top Represents how far the node is from the top of the project board (ex: 100px from the top)
+ * @param left Represents how far the node is from the left of the project board (ex: 100px from the left)
+ * @param selectedNode The node that is currently selected
+ * @param updateStateCallback Function that updates the state of the project
+ * @param updateErrorMessageCallback Defines any errors that have occurred
+ */
 export const handleAddNode = async (type, top, left, selectedNode, updateStateCallback, updateErrorMessageCallback) => {
     if (selectedNode) {
         const newNode = {
@@ -26,6 +35,12 @@ export const handleAddNode = async (type, top, left, selectedNode, updateStateCa
     }
 };
 
+/**
+ * Determines what happens when a node is clicked
+ * @param nodeId The ID of the node that was clicked
+ * @param currentSelectedNode The node that is currently selected
+ * @param updateStateCallback Function that updates the state of the node (clicked/un-clicked)
+ */
 export const handleNodeClick = async (nodeId, currentSelectedNode, updateStateCallback) => {
     const nodes = await getAllNodes();
     const selectedNode =
@@ -34,6 +49,10 @@ export const handleNodeClick = async (nodeId, currentSelectedNode, updateStateCa
     updateStateCallback({ selectedNode });
 };
 
+/**
+ * Resets the project to its initial state
+ * @param updateStateCallback The function that updates the state of the project
+ */
 export const handleReset = async (updateStateCallback) => {
     await resetDatabase();
     await addCentralNode();
