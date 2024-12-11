@@ -1,4 +1,4 @@
-import { addNodeToDB, addLinkToDB, getAllNodes, getAllLinks, resetDatabase, addCentralNode } from '../model/database.js';
+import { addNodeToDB, addLinkToDB, getAllNodes, getAllLinks, resetDatabase, addCentralNode } from '../database/database.js';
 
 
 const niceOffset = 300;

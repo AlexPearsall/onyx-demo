@@ -3,10 +3,10 @@ import Sidebar from './components/Sidebar.jsx';
 import Header from './components/Header.jsx';
 import Grid from './components/Grid.jsx';
 import ProjectNodes from "./components/ProjectNodes.jsx";
-import { initDB, getAllNodes, getAllLinks } from './model/database.js';
-import { handleAddNode, handleNodeClick, handleReset } from './controller/logic.js';
+import { initDB, getAllNodes, getAllLinks } from './database/database.js';
+import { handleAddNode, handleNodeClick, handleReset } from './logic/logic.js';
 import './App.css';
-import { handlePosition } from "./controller/logic.js";
+import { handlePosition } from "./logic/logic.js";
 
 export const Context = React.createContext()
 
