@@ -20,7 +20,7 @@ function Node({ top, left, type, onClick, isSelected, ring, place, parent, id, c
         const nMap = new Map(map);
         nMap.set(id, [data.top, data.left, data.childCount]);
         setMap(nMap); // Update the context with the new map
-    },[data, id, map, setMap]); // Depend on `data` for updates
+    },[]); // Depend on `data` for updates
     
     useEffect(() => {
         const nMap = new Map(map)
@@ -30,7 +30,7 @@ function Node({ top, left, type, onClick, isSelected, ring, place, parent, id, c
             console.log(data)
             setData({ top: data[0], left: data[1], childCount: data[2] }); // Access by index
         }
-    },[map, id])
+    },[map])
 
     return (
         <div
