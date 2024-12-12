@@ -30,7 +30,7 @@ export async function initDB() {
 
 // Add a central node
 export async function addCentralNode() {
-    const centralNode = { id: `node-${Date.now()}`, top: 206, left: 465, type: 'Central Node', ring:0, place:0,id:0, childCount:0 };
+    const centralNode = { top: 206, left: 465, type: 'Central Node', ring:0, place:0,id:0, childCount:0 };
     await addNodeToDB(centralNode);
 }
 

@@ -19,11 +19,8 @@ function Node({ top, left, type, onClick, isSelected, ring, place, parent, id, c
         // Create a new map to avoid mutating the old map
         const nMap = new Map(map);
         nMap.set(id, [data.top, data.left, data.childCount]);
-        //console.log(nMap)
         setMap(nMap); // Update the context with the new map
-
-        
-    },[]); // Depend on `data` for updates
+    },[data, id, map, setMap]); // Depend on `data` for updates
     
     useEffect(() => {
         const nMap = new Map(map)
@@ -32,17 +29,8 @@ function Node({ top, left, type, onClick, isSelected, ring, place, parent, id, c
             const data = nMap.get(id)
             console.log(data)
             setData({ top: data[0], left: data[1], childCount: data[2] }); // Access by index
-            
         }
-
-
-    },[map])
-
-
-
-
-
-
+    },[map, id])
 
     return (
         <div
